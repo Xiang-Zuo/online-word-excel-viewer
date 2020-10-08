@@ -19,6 +19,7 @@ class WordParser implements DocInterface
 
         $phpWord = $phpWordReader->load($path);
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'HTML');
+        // it only have save method, read the source code and find getContent() method
         return $objWriter->getContent();
     }
 

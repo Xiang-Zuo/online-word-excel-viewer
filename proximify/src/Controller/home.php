@@ -19,18 +19,21 @@ class home
     }
 
     public function main() {
+        // associate with html form submit mechanism
         if (isset($_POST["submit"])) {
+            // $_File is an associative array of items uploaded to the current script via the HTTP POST method
             $name = $_FILES['fileToUpload']['name'];
             $path = FileHandler::move($_FILES['fileToUpload']);
             $this->db->addFile($name, $path);
         }
         if (isset($_POST["submit-content"])) {
-            // TODO: EXCP
+            print_r($_POST);
             if (!array_key_exists('type', $_POST)){
-                throw new RuntimeException('Type Value is null');
+                throw new \RuntimeException('Type Value is null');
             }
             if (empty($_POST['name'])){
-                throw new RuntimeException("File name cannot be empty");
+                echo "Error: file name is required";
+                throw new \RuntimeException("File name is empty");
             }
             if ($_POST['type'] == 'word') {
                 $ext = 'docx';

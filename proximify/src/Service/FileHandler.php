@@ -4,6 +4,10 @@ namespace App\Service;
 
 class FileHandler
 {
+    /**
+     * @param $file
+     * @return string
+     */
     public static function move($file)
     {
         try {
@@ -29,7 +33,7 @@ class FileHandler
                     throw new \RuntimeException('Unknown errors.');
             }
 
-            // You should also check filesize here.
+            // check filesize
             if ($file['size'] > 10000000) {
                 throw new \RuntimeException('Exceeded filesize limit.');
             }
@@ -37,8 +41,10 @@ class FileHandler
             $info = pathinfo($file['name']);
             $ext = $info['extension'];
 
+            // create unique filename
             $path = FileHandler::generatePath($ext);
 
+            // move the file to upload folder, store it like a tmp file
             if (!move_uploaded_file(
                 $file['tmp_name'],
                 $path
@@ -54,6 +60,10 @@ class FileHandler
         return $path;
     }
 
+    /**
+     * @param $ext
+     * @return string
+     */
     public static function generatePath($ext)
     {
         return sprintf('./uploads/%s.%s',

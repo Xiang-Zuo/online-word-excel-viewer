@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Service\ExcelParser;
@@ -7,7 +8,6 @@ use http\Exception\RuntimeException;
 
 class file
 {
-
     /**
      * @var \App\Database $db
      */
@@ -20,13 +20,15 @@ class file
         $this->twig = $twig;
     }
 
-    public function main() {
+    public function main()
+    {
         echo 'file main works';
     }
 
-    public function get() {
+    public function get()
+    {
         if (!array_key_exists('id', $_POST)) {
-            throw new RuntimeException('ID missed');
+            throw new \RuntimeException('ID missed');
         }
 
         $id = $_POST['id'];
