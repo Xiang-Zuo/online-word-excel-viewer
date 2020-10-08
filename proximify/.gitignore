@@ -1,0 +1,5 @@
+/vendor/
+!/uploads
+/uploads/*
+!/uploads/.gitkeep
+.idea/*

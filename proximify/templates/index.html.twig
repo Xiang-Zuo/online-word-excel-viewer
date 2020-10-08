@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <link rel="stylesheet" type="text/css" href="/assets/css/self.css"/>
+</head>
+<body>
+<h1 class="text-center mb-5">Proximify File System</h1>
+
+{# Upload Section1 #}
+<div class="container bg-light p-4">
+    <form class="row" action="/" method="POST" enctype="multipart/form-data">
+        <div class="col-8">
+            <div class="form-group">
+                <label for="uploadFile">Upload Word/Excel File (.doc, .docx, .xlsx, .xls, .csv):</label>
+                <input type="hidden" name="MAX_FILE_SIZE" value="10000000"/>
+                <input type="file" class="form-control-file" id="uploadFile" name="fileToUpload">
+            </div>
+        </div>
+        <div class="col-4">
+            <button type="submit" name="submit" class="btn btn-primary">Upload</button>
+        </div>
+    </form>
+</div>
+
+{# Detail Section2 #}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-8">
+            <h2>Display File</h2>
+            <div class="container border border-secondary file-content">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="dropdown file-dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Files
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {% for file in files %}
+                        <li class="dropdown-item" data-id="{{ file.id }}" data-name="{{ file.name }}"
+                            data-path="{{ file.path }}">{{ file.name }}</li>
+                    {% endfor %}
+                </div>
+                <a class="btn btn-secondary disabled download-btn" href="#">
+                    Download
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{# Add Section3 #}
+<div class="container mt-5">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="word-tab" data-toggle="tab" href="#word" role="tab" aria-controls="word"
+               aria-selected="true">Word</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="excel-tab" data-toggle="tab" href="#excel" role="tab" aria-controls="excel"
+               aria-selected="false">Excel</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="word" role="tabpanel" aria-labelledby="word-tab">
+            <div class="container bg-light p-4 mt-5">
+                <form class="row" action="/" method="POST">
+                    <div class="col-6">
+                        <input type="hidden" name="type" value="word"/>
+                        <div class="form-group">
+                            <label for="name">File Name</label>
+                            <input type="text" aria-describedby="nameHelp" class="form-control" id="name"
+                                   placeholder="Enter Name" name="name">
+                            <small id="nameHelp" class="form-text text-muted">File Extension is not Necessary</small>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control" id="title" placeholder="Enter Title" name="title">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="title">Content</label>
+                            <textarea class="form-control" name="content" placeholder="Enter File Content"
+                                      rows="12"></textarea>
+                        </div>
+                        <button type="submit" name="submit-content" class="btn btn-primary float-right">Add File
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="excel" role="tabpanel" aria-labelledby="excel-tab">
+            <div class="container bg-light p-4 mt-5">
+                <form class="row" action="/" method="POST">
+                    <div class="col-6">
+                        <input type="hidden" name="type" value="excel"/>
+                        <div class="form-group">
+                            <label for="name">File Name</label>
+                            <input type="text" aria-describedby="nameHelp" class="form-control" id="name"
+                                   placeholder="Enter Name" name="name">
+                            <small id="nameHelp" class="form-text text-muted">File Extension is not Necessary</small>
+
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="title">Content</label>
+                            <small id="excelHelp" class="form-text text-muted">Each line will be a row in Excel; Each
+                                cell will be separated by '|'</small>
+                            <textarea aria-describedby="excelHelp" class="form-control" name="content"
+                                      placeholder="Enter File Content" rows="12"></textarea>
+                        </div>
+                        <button type="submit" name="submit-content" class="btn btn-primary float-right">Add File
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+<script src="/assets/js/self.js"></script>
+
+
+</body>
+</html>
