@@ -3,3 +3,4 @@
 /uploads/*
 !/uploads/.gitkeep
 .idea/*
+.DS_Store
