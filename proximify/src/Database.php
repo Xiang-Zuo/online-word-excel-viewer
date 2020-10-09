@@ -21,7 +21,7 @@ class Database
         if (!$this->pdo) {
             $this->pdo = new \PDO(
             // TODO: should put it to private config file
-                "mysql:dbname=file;port=3306;host=localhost", 'root', 'root'
+                "mysql:dbname=file;port=8889;host=localhost", 'root', 'root'
             );
         }
 

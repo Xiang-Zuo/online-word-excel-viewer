@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="61829635-86fe-4c7e-a047-2ed829d2dfa8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/proximify/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/proximify/composer.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/proximify/composer.json</pharConfigPath>
+    <execution>
+      <executable path="composer" />
+    </execution>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/proximify/vendor/zendframework/zend-escaper" />
+      <path value="$PROJECT_DIR$/proximify/vendor/phpoffice/phpword" />
+      <path value="$PROJECT_DIR$/proximify/vendor/phpoffice/phpspreadsheet" />
+      <path value="$PROJECT_DIR$/proximify/vendor/phpoffice/common" />
+      <path value="$PROJECT_DIR$/proximify/vendor/markbaker/complex" />
+      <path value="$PROJECT_DIR$/proximify/vendor/markbaker/matrix" />
+      <path value="$PROJECT_DIR$/proximify/vendor/maennchen/zipstream-php" />
+      <path value="$PROJECT_DIR$/proximify/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/proximify/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/proximify/vendor/myclabs/php-enum" />
+      <path value="$PROJECT_DIR$/proximify/vendor/pclzip/pclzip" />
+      <path value="$PROJECT_DIR$/proximify/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/proximify/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/proximify/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/proximify/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/proximify/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/proximify/vendor/composer" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="1icNPTPh6zzv4WR4ImEJZVHeTz3" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="61829635-86fe-4c7e-a047-2ed829d2dfa8" name="Default Changelist" comment="" />
+      <created>1602202897369</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1602202897369</updated>
+      <workItem from="1602202899374" duration="197000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1086" y="444" key="ComposerInitDialogKey" timestamp="1602202912116">
+      <screen x="-1680" y="0" width="1680" height="1050" />
+    </state>
+    <state x="-1086" y="444" key="ComposerInitDialogKey/0.0.2560.1440/-1680.0.1680.1050@-1680.0.1680.1050" timestamp="1602202912116" />
+  </component>
+</project>
