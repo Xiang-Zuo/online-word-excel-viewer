@@ -27,7 +27,6 @@ class home
             $this->db->addFile($name, $path);
         }
         if (isset($_POST["submit-content"])) {
-            print_r($_POST);
             if (!array_key_exists('type', $_POST)){
                 throw new \RuntimeException('Type Value is null');
             }
