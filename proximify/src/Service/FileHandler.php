@@ -42,7 +42,7 @@ class FileHandler
             $ext = $info['extension'];
 
             // create unique filename
-            $path = FileHandler::generatePath($ext);
+            $path = FileHandler::generatePath($info['filename'], $ext);
 
             // move the file to upload folder, store it like a tmp file
             if (!move_uploaded_file(
@@ -61,14 +61,24 @@ class FileHandler
     }
 
     /**
+     * go to the uploads directory to check if any file in /uploads has the same name as the new file
+     * if duplicate add ($count) after file name
+     * @param $fileName
      * @param $ext
      * @return string
      */
-    public static function generatePath($ext)
+    public static function generatePath($fileName, $ext)
     {
-        return sprintf('./uploads/%s.%s',
-            md5(uniqid()),
-            $ext
+        $directory = dirname(__DIR__, 2) . "/uploads";
+        $files = array_diff(scandir($directory), array('..', '.', '.gitkeep'));
+        $count = 0;
+        foreach ($files as $key => $value){
+            if (substr($value, 0,strlen($fileName)) === $fileName){
+                $count++;
+            }
+        }
+        return sprintf('./uploads/%s',
+            ($count > 0) ? $fileName . ' (' . $count . ').'. $ext : $fileName . '.' . $ext
         );
     }
 }

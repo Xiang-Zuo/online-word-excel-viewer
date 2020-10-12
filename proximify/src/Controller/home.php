@@ -24,7 +24,7 @@ class home
             // $_File is an associative array of items uploaded to the current script via the HTTP POST method
             $name = $_FILES['fileToUpload']['name'];
             $path = FileHandler::move($_FILES['fileToUpload']);
-            $this->db->addFile($name, $path);
+            // $this->db->addFile($name, $path);
         }
         if (isset($_POST["submit-content"])) {
             if (!array_key_exists('type', $_POST)){
@@ -44,9 +44,9 @@ class home
             $title = isset($_POST['title']) ? $_POST['title']: '';
             $name = $_POST['name'] . '.' . $ext;
             $content = $_POST['content'];
-            $path = FileHandler::generatePath($ext);
+            $path = FileHandler::generatePath($_POST['name'], $ext);
             $service::addContent($content, $path, $title);
-            $this->db->addFile($name, $path);
+            // $this->db->addFile($name, $path);
         }
         $fileArr = $this->db->getFileList();
         // display web page
