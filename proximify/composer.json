@@ -1,13 +1,17 @@
 {
   "name": "xiangzuo951218/online-Word-Excel-viewer",
   "description": "A app that can upload, create and view word/excel file online",
+  "type": "library",
+  "license": "MIT",
   "authors": [
     {
       "name": "Xiang Zuo",
       "email": "zuo.xiang.tom@gmail.com"
     }
   ],
+  "minimum-stability": "stable",
   "require": {
+    "php": ">=7.2.0",
     "phpoffice/phpword": "^0.17.0",
     "phpoffice/phpspreadsheet": "^1.14",
     "twig/twig": "^3.0",
