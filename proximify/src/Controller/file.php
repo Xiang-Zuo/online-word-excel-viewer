@@ -4,48 +4,50 @@ namespace App\Controller;
 
 use App\Service\ExcelParser;
 use App\Service\WordParser;
-use http\Exception\RuntimeException;
+use \RuntimeException;
 
+/**
+ * Class file
+ * @package App\Controller
+ */
 class file
 {
-    /**
-     * @var \App\Database $db
-     */
-    private $db;
     private $twig;
+    private string $rootDir;
 
-    function __construct($db, $twig)
+    /**
+     * file constructor.
+     * @param $twig
+     * @param $rootDir
+     */
+    public function __construct($twig, string $rootDir)
     {
-        $this->db = $db;
         $this->twig = $twig;
+        $this->rootDir = $rootDir;
     }
 
-    public function main()
+    /**
+     * @return string|null
+     */
+    public function run(): ?string
     {
-        echo 'file main works';
-    }
-
-    public function get()
-    {
-        if (!array_key_exists('id', $_POST)) {
-            throw new \RuntimeException('ID missed');
+        if (!empty($_POST['name'])) {
+            throw new RuntimeException('ID missed');
         }
-
-        $id = $_POST['id'];
-        $file = $this->db->getFileById($id);
-        $name = $file['name'];
+        $name = $_POST['name'];
+        $path = $this->rootDir . '/www/uploads/' . $name;
         $info = pathinfo($name);
         $ext = $info['extension'];
-        echo "aaa";
         if ($ext == 'doc' || $ext == 'docx') {
-            $content = WordParser::getContent($ext, $file['path']);
+            $content = WordParser::getContent($ext, $path);
         } else {
-            $content = ExcelParser::getContent($ext, $file['path']);
+            $content = ExcelParser::getContent($ext, $path);
         }
 
-        return json_encode([
-            'data' => $content
-        ]);
+        return json_encode(
+            [
+                'data' => $content
+            ]
+        );
     }
-
 }

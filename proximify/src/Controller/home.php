@@ -1,38 +1,49 @@
 <?php
 
 namespace App\Controller;
-use App\Service\FileHandler;
-use http\Exception\RuntimeException;
 
+use App\Service\FileHandler;
+use \RuntimeException;
+
+/**
+ * Class home
+ * @package App\Controller
+ */
 class home
 {
-    /**
-     * @var \App\Database $db
-     */
-    private $db;
     private $twig;
+    private string $rootDir;
 
-    function __construct($db, $twig)
+    /**
+     * home constructor.
+     * @param $twig
+     * @param string $rootDir
+     */
+    public function __construct($twig, string $rootDir)
     {
-        $this->db = $db;
         $this->twig = $twig;
+        $this->rootDir = $rootDir;
     }
 
-    public function main() {
-        // associate with html form submit mechanism
+    /**
+     * @return mixed
+     */
+    public function run()
+    {
         if (isset($_POST["submit"])) {
-            // $_File is an associative array of items uploaded to the current script via the HTTP POST method
             $name = $_FILES['fileToUpload']['name'];
-            $path = FileHandler::move($_FILES['fileToUpload']);
-            // $this->db->addFile($name, $path);
+            $info = pathinfo($name);
+            $ext = $info['extension'];
+            $path = FileHandler::generatePath($info['filename'], $ext, $this->rootDir);
+            FileHandler::move($_FILES['fileToUpload'], $path);
         }
         if (isset($_POST["submit-content"])) {
-            if (!array_key_exists('type', $_POST)){
-                throw new \RuntimeException('Type Value is null');
+            if (!array_key_exists('type', $_POST)) {
+                throw new RuntimeException('Type Value is null');
             }
-            if (empty($_POST['name'])){
+            if (empty($_POST['name'])) {
                 echo "Error: file name is required";
-                throw new \RuntimeException("File name is empty");
+                throw new RuntimeException("File name is empty");
             }
             if ($_POST['type'] == 'word') {
                 $ext = 'docx';
@@ -41,16 +52,12 @@ class home
                 $ext = 'xlsx';
                 $service = 'App\Service\ExcelParser';
             }
-            $title = isset($_POST['title']) ? $_POST['title']: '';
-            $name = $_POST['name'] . '.' . $ext;
+            $title = isset($_POST['title']) ? $_POST['title'] : '';
             $content = $_POST['content'];
-            $path = FileHandler::generatePath($_POST['name'], $ext);
+            $path = FileHandler::generatePath($_POST['name'], $ext, $this->rootDir);
             $service::addContent($content, $path, $title);
-            // $this->db->addFile($name, $path);
         }
-        $fileArr = $this->db->getFileList();
-        // display web page
+        $fileArr = FileHandler::getFileList($this->rootDir);
         return $this->twig->render('index.html.twig', ['files' => $fileArr]);
     }
-
 }
