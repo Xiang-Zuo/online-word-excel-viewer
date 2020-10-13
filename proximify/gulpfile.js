@@ -4,7 +4,7 @@ const sass = require('gulp-sass');
 
 //Todo gulp watch, minify
 exports.default = function() {
-    return src('assets/css/self.scss')
+    return src('assets/scss/self.scss')
         .pipe(sass({
             errorLogToConsole: true
         })).on('error', sass.logError)

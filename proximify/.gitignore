@@ -1,7 +1,7 @@
 /vendor/
-!/uploads
-/uploads/*
-!/uploads/.gitkeep
+!/www/uploads
+/www/uploads/*
+!/www/uploads/.gitkeep
 .idea/*
 .DS_Store
 /node_modules/
