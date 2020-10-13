@@ -1,5 +1,6 @@
 # online-Word-Excel-viewer
 
+Version 1 (with DB):
 Database:
 DB name: file
 table name: file
@@ -12,3 +13,6 @@ CREATE TABLE `file`.`file` (
   `path` VARCHAR(300) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC));
+
+Version 2 (DB independent):
+
