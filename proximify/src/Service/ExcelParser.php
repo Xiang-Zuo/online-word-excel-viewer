@@ -2,11 +2,22 @@
 
 namespace App\Service;
 
+use PhpOffice\PhpSpreadsheet\Reader\Exception;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
-
+/**
+ * Class ExcelParser
+ * @package App\Service
+ */
 class ExcelParser implements DocInterface
 {
+    /**
+     * @param $ext
+     * @param $path
+     * @return mixed
+     * @throws Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+     */
     public static function getContent($ext, $path)
     {
         $config = [
@@ -25,6 +36,13 @@ class ExcelParser implements DocInterface
         return $objWriter->generateHTMLAll();
     }
 
+    /**
+     * @param $content
+     * @param $path
+     * @param string $title
+     * @return bool
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+     */
     public static function addContent($content, $path, $title = '')
     {
         $phpExcel = new \PhpOffice\PhpSpreadsheet\Spreadsheet();

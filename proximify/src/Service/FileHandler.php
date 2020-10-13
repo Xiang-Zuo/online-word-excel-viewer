@@ -2,13 +2,18 @@
 
 namespace App\Service;
 
+/**
+ * Class FileHandler
+ * @package App\Service
+ */
 class FileHandler
 {
     /**
      * @param $file
-     * @return string
+     * @param $path
+     * @return mixed
      */
-    public static function move($file)
+    public static function move($file, $path)
     {
         try {
             // Undefined | Multiple Files | $_FILES Corruption Attack
@@ -20,7 +25,7 @@ class FileHandler
                 throw new \RuntimeException('Invalid parameters.');
             }
 
-            // Check $_FILES['upfile']['error'] value.
+            // Check $_FILES['uploadFile']['error'] value.
             switch ($file['error']) {
                 case UPLOAD_ERR_OK:
                     break;
@@ -38,13 +43,6 @@ class FileHandler
                 throw new \RuntimeException('Exceeded filesize limit.');
             }
 
-            $info = pathinfo($file['name']);
-            $ext = $info['extension'];
-
-            // create unique filename
-            $path = FileHandler::generatePath($info['filename'], $ext);
-
-            // move the file to upload folder, store it like a tmp file
             if (!move_uploaded_file(
                 $file['tmp_name'],
                 $path
@@ -52,9 +50,7 @@ class FileHandler
                 throw new \RuntimeException('Failed to move uploaded file.');
             }
         } catch (\RuntimeException $e) {
-
             echo $e->getMessage();
-
         }
 
         return $path;
@@ -65,20 +61,78 @@ class FileHandler
      * if duplicate add ($count) after file name
      * @param $fileName
      * @param $ext
+     * @param string $rootPath
      * @return string
      */
-    public static function generatePath($fileName, $ext)
+    public static function generatePath($fileName, $ext, $rootPath = '')
     {
-        $directory = dirname(__DIR__, 2) . "/uploads";
-        $files = array_diff(scandir($directory), array('..', '.', '.gitkeep'));
+        if (empty($rootPath)) {
+            $rootPath = dirname(__DIR__, 2);
+        }
+        $directory = $rootPath . "/www/uploads";
+        $fileList = FileHandler::filterByExtension(scandir($directory));
+        $count = FileHandler::getExistFileCount($fileList, $fileName);
+        return sprintf(
+            $rootPath . '/www/uploads/%s',
+            ($count > 0) ? $fileName . '(' . $count . ').' . $ext : $fileName . '.' . $ext
+        );
+    }
+
+    /**
+     * @param $fileList
+     * @return array
+     */
+    public static function filterByExtension($fileList)
+    {
+        $extList = ['doc', 'docx', 'csv', 'xlsx', 'xls'];
+        $result = [];
+
+        foreach ($fileList as $value) {
+            $ext = pathinfo($value, PATHINFO_EXTENSION);
+            if (in_array($ext, $extList)) {
+                $result[] = $value;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * @param $fileList
+     * @param $fileName
+     * @return int
+     */
+    public static function getExistFileCount($fileList, $fileName)
+    {
         $count = 0;
-        foreach ($files as $key => $value){
-            if (substr($value, 0,strlen($fileName)) === $fileName){
+        $pattern = '/^' . $fileName . '(\(\d+\))?$/i';
+
+        foreach ($fileList as $value) {
+            if (preg_match($pattern, pathinfo($value, PATHINFO_FILENAME))) {
                 $count++;
             }
         }
-        return sprintf('./uploads/%s',
-            ($count > 0) ? $fileName . ' (' . $count . ').'. $ext : $fileName . '.' . $ext
-        );
+        return $count;
+    }
+
+    /**
+     * @param $path
+     * @return array
+     */
+    public static function getFileList($path)
+    {
+        if (empty($path)) {
+            $path = dirname(__DIR__, 2);
+        }
+        $directory = $path . "/www/uploads";
+        $fileList = FileHandler::filterByExtension(scandir($directory));
+        $fileArr = [];
+        foreach ($fileList as $key => $value) {
+            $fileArr[sizeof($fileArr)] = [
+                'id' => $key,
+                'name' => $value,
+                'path' => './uploads/' . $value
+            ];
+        }
+        return $fileArr;
     }
 }

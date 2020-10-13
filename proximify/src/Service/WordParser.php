@@ -2,8 +2,20 @@
 
 namespace App\Service;
 
+use PhpOffice\PhpWord\Exception\Exception;
+
+/**
+ * Class WordParser
+ * @package App\Service
+ */
 class WordParser implements DocInterface
 {
+    /**
+     * @param $ext
+     * @param $path
+     * @return mixed
+     * @throws Exception
+     */
     public static function getContent($ext, $path)
     {
         $config = [
@@ -23,19 +35,21 @@ class WordParser implements DocInterface
         return $objWriter->getContent();
     }
 
+    /**
+     * @param $content
+     * @param $path
+     * @param $title
+     * @return bool
+     * @throws Exception
+     */
     public static function addContent($content, $path, $title)
     {
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
-
         $section = $phpWord->addSection();
-
-        $section->addText($title, array('name' => 'Calibri', 'size' => 20, 'align' => 'center'));
-
-        $section->addText($content, array('name' => 'Calibri', 'size' => 10, 'align' => 'both'));
-
+        $section->addText($title, ['name' => 'Calibri', 'size' => 20, 'align' => 'center']);
+        $section->addText($content, ['name' => 'Calibri', 'size' => 15, 'align' => 'both']);
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
         $objWriter->save($path);
-
         return true;
     }
 }
