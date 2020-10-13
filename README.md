@@ -15,4 +15,6 @@ CREATE TABLE `file`.`file` (
   UNIQUE INDEX `id_UNIQUE` (`id` ASC));
 
 Version 2 (DB independent):
+  composer require TomorrowIand/word-excel-viewer
+  cd www & php -S localhost:8888
 
