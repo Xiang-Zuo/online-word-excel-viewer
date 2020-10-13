@@ -1,5 +1,0 @@
-#redirect client request pages to index.php
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*) index.php?url=$1

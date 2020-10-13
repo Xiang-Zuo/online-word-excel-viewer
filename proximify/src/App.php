@@ -2,6 +2,10 @@
 
 namespace App;
 
+use RuntimeException;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
+
 /**
  * Class App
  * @package App
@@ -15,8 +19,8 @@ class App
      */
     public function __construct()
     {
-        $loader = new \Twig\Loader\FilesystemLoader('templates');
-        $twig = new \Twig\Environment($loader, []);
+        $loader = new FilesystemLoader('../templates');
+        $twig = new Environment($loader, []);
 
         $this->twig = $twig;
     }
@@ -31,7 +35,7 @@ class App
         $rootDir = isset($params['rootDir']) ? $params['rootDir'] : __DIR__ . '/..';
 
         if (!$controllerName || !strpos($controllerName, '.') === false) {
-            throw new \RuntimeException('controller name error');
+            throw new RuntimeException('controller name error');
         }
 
         $prefix = 'App\\Controller\\' . $controllerName;

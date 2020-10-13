@@ -31,8 +31,8 @@ class file
      */
     public function run(): ?string
     {
-        if (!empty($_POST['name'])) {
-            throw new RuntimeException('ID missed');
+        if (empty($_POST['name'])) {
+            throw new RuntimeException('Name missed');
         }
         $name = $_POST['name'];
         $path = $this->rootDir . '/www/uploads/' . $name;
