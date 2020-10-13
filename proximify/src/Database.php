@@ -18,7 +18,7 @@ class Database
     {
         $fileArr = [];
         $directory = dirname(__DIR__, 1) . "/uploads";
-        $files = array_diff(scandir($directory), array('..', '.', '.gitkeep'));
+        $files = array_diff(scandir($directory), array('..', '.', '.gitkeep', '.DS_Store'));
         foreach ($files as $key => $value){
             $fileArr[sizeof($fileArr)] = [
                                         'id' => $key,

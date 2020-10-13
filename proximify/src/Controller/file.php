@@ -36,6 +36,7 @@ class file
         $name = $file['name'];
         $info = pathinfo($name);
         $ext = $info['extension'];
+        echo "aaa";
         if ($ext == 'doc' || $ext == 'docx') {
             $content = WordParser::getContent($ext, $file['path']);
         } else {

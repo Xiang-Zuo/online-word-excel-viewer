@@ -1,0 +1,6 @@
+$previewHeight : 50vh;
+
+.file-content {
+    height: $previewHeight;
+    overflow-y: scroll;
+}
