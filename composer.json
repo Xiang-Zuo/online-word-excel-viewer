@@ -11,7 +11,7 @@
   ],
   "minimum-stability": "stable",
   "require": {
-    "php": ">=7.2.0",
+    "php": ">=7.3.0",
     "phpoffice/phpword": "^0.17.0",
     "phpoffice/phpspreadsheet": "^1.14",
     "twig/twig": "^3.0",
